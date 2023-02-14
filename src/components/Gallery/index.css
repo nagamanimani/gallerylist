@@ -15,4 +15,5 @@
 }
 .li-con {
   display: flex;
+  flex-direction: row;
 }

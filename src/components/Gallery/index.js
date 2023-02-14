@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import ThumbnailItem from './components/ThumbnailItem'
+import ThumbnailItem from '../ThumbnailItem'
 
 const imagesList = [
   {
@@ -73,27 +73,35 @@ const imagesList = [
 ]
 
 // Write your code here.
-class Gallery extends Components {
-  state = {imgList: imagesList[0].id}
+class Gallery extends Component {
+  state = {imageList: imagesList[0].id}
 
   imageButtun = key => {
-    this.setState({imgList: key})
+    this.setState({imageList: key})
   }
 
   render() {
-    const {id, imageUrl} = this.state
-    ;<div className="con">
-      <img src={imageUrl} className="img-con" />
+    const {imageList} = this.state
 
-      <h>Natural photography </h>
-      <p>naatural photography by nagamani</p>
+    const {imageUrl, imageAltText} = imagesList[imageList]
+    return (
+      <div className="con">
+        <img src={imageUrl} className="img-con" alt={imageAltText} />
 
-      <ul className="li-con">
-        {imagesList.map(each => (
-          <ThumbnailItem imagesList={imagesList} kye={imagesList.id} />
-        ))}
-      </ul>
-    </div>
+        <h>Natural photography </h>
+        <p>naatural photography by nagamani</p>
+
+        <ul className="li-con">
+          {imagesList.map(each => (
+            <ThumbnailItem
+              imagesList={each}
+              kye={each.id}
+              imageButtun={this.imageButtun}
+            />
+          ))}
+        </ul>
+      </div>
+    )
   }
 }
 export default Gallery
